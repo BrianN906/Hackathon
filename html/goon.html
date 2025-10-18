@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AggieQuest | Submission</title>
+    <link rel="stylesheet" href="../graphics/form-style.css">
+</head>
+<body>
+    <div class="nav-bar">
+        <img src ="../graphics/logo.png" id="logo" alt="Logo">
+        <h1>AggieQuest</h1>
+    </div>
+
+    <div class="title">
+        <h1>Task Completion Submission</h1>
+        
+        <form action="../form_handler.py" method="POST" enctype="multipart/form-data">
+            <label for="image">Upload Proof of Completion Here:</label><br><br>
+            <input type="file" id="image" name="image" accept="image/*" required><br><br><br><br>
+            
+            <label for="description">Description (Anything you want to write about!):</label><br><br>
+            <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter your description here..."></textarea><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

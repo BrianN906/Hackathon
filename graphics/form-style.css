@@ -1,0 +1,22 @@
+#logo {
+    width:70px;
+    height:70px;
+}
+
+.nav-bar {
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    top:0;
+    left:0;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: #880015;
+}
+
+.title {
+    position: relative;
+    top: 100px;
+    text-align: center;
+}

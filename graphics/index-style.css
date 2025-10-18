@@ -1,0 +1,21 @@
+#logo {
+    width:70px;
+    height:70px;
+}
+
+.nav-bar {
+    display: flex;
+    position: absolute;
+    width: 100vw;
+    top:0;
+    left:0;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: #880015;
+}
+
+h1 {
+    text-align: left;
+    
+}
