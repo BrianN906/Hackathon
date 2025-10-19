@@ -43,13 +43,13 @@ function displaySubmissions(submissions) {
     });
 }
 
-// create a card - basic version
+// create card
 function createSubmissionCard(submission) {
     const card = document.createElement('div');
     card.className = 'gallery-card';
     card.dataset.taskId = submission.task_id;
     
-    // format date - simple version
+    // format date
     const date = new Date(submission.date);
     const formattedDate = date.toLocaleDateString();
     

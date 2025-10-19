@@ -2,12 +2,8 @@
 user_data.json
 submissions.json
 uploads/
-*.jpg
-*.png
-*.jpeg
-*.gif
-*.bmp
-*.webp
+# Note: Only exclude user-uploaded images, not project assets
+# Project assets like gear.png, logo.png should be included
 
 # Python cache
 __pycache__/
