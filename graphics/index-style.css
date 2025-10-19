@@ -88,9 +88,6 @@ body {
     text-align: left;
 }
 
-.time-right {
-    text-align: right;
-}
 
 /* task section */
 .task-section {
@@ -128,9 +125,6 @@ body {
     text-align: left;
 }
 
-.streak-right {
-    text-align: right;
-}
 
 /* buttons */
 .submit-task-button, .save-button {
@@ -147,33 +141,7 @@ body {
     background-color: #6b0010;
 }
 
-.skip-day-button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
 
-.skip-day-button:hover {
-    background-color: #c82333;
-}
-
-.skip-day-button:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-}
-
-/* countdown timer */
-.countdown-timer {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #880015;
-    font-family: monospace;
-}
 
 /* settings page */
 .settings-container {
@@ -419,25 +387,7 @@ body {
         gap: 10px;
     }
     
-    .welcome-left, .time-right, .submit-left, .streak-right {
+    .welcome-left, .submit-left {
         text-align: center;
     }
-}
-
-/* Streak display styling */
-.streak-display {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #dc3545; /* Red color for 0 days */
-    margin-top: 5px;
-}
-
-.streak-display:not([data-streak="0"]) {
-    color: #28a745; /* Green color for non-zero streaks */
-}
-
-.streak-label {
-    font-size: 0.9em;
-    color: #666;
-    margin-bottom: 5px;
 }

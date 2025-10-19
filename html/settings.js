@@ -80,26 +80,8 @@ async function handleFormSubmit(event) {
         return;
     }
     
-    try {
-        const response = await fetch('http://127.0.0.1:5000/settings', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(settings)
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            showStatusMessage('Settings saved!', 'success');
-        } else {
-            showStatusMessage('Error: ' + result.message, 'error');
-        }
-    } catch (error) {
-        console.log('Error saving settings:', error);
-        showStatusMessage('Error saving settings. Check server.', 'error');
-    }
+    // Just show success message - no backend call
+    showStatusMessage('Settings saved! (Demo mode)', 'success');
 }
 
 // show status message - basic version

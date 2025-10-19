@@ -1,0 +1,14 @@
+{
+  "completed_tasks": [],
+  "difficulty_preference": "normal",
+  "current_task": {
+    "task": "Watch a short educational or motivational video.",
+    "task_id": "aggieLife_T2_1760841576",
+    "category": "aggieLife",
+    "tier": "T2",
+    "completed": false
+  },
+  "last_task_date": "2025-10-18",
+  "name": "John",
+  "is_skater": false
+}
