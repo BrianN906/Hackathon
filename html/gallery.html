@@ -3,9 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AggieQuest | Gallery</title>
+    <link rel="stylesheet" href="/index-style.css">
 </head>
 <body>
-    
+    <nav class="nav-bar">
+        <a href="index.html" class="logo-link">
+            <img src="/logo.png" id="logo" alt="Logo">
+            <h1>AggieQuest</h1>
+        </a>
+        <div class="nav-links">
+            <a href="submit.html" class="nav-link">Submit</a>
+            <a href="gallery.html" class="nav-link active">Gallery</a>
+            <a href="settings.html" class="nav-link"><img src="/gear.png" alt="Settings" class="gear-icon"></a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="title-section">
+            <h2 class="page-title">Gallery</h2>
+        </section>
+
+        <section class="gallery-section">
+            <div class="gallery-container">
+                <p class="gallery-description">Your completed tasks will appear here!</p>
+            </div>
+            
+            <div class="gallery-actions">
+                <button id="back-to-home-btn" class="back-to-home-button">← Back to Home</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="/gallery.js"></script>
 </body>
 </html>

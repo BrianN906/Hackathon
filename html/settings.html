@@ -3,9 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/index-style.css">
+    <title>AggieQuest | Settings</title>
 </head>
 <body>
-    
+    <nav class="nav-bar">
+        <a href="index.html" class="logo-link">
+            <img src="/logo.png" id="logo" alt="Logo">
+            <h1>AggieQuest</h1>
+        </a>
+        <div class="nav-links">
+            <a href="submit.html" class="nav-link">Submit</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="settings.html" class="nav-link active"><img src="/gear.png" alt="Settings" class="gear-icon"></a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="title-section">
+            <h2 class="page-title">Settings</h2>
+        </section>
+
+        <section class="settings-section">
+            <div class="settings-container">
+                <form id="settings-form" class="settings-form">
+                    <!-- Name Section -->
+                    <div class="form-group">
+                        <h3 class="settings-title">Name</h3>
+                        <input type="text" id="name" name="name" class="text-input" placeholder="Enter your name" maxlength="29" required>
+                        <!-- TODO: add name validation -->
+                    </div>
+
+                    <!-- Preferred Task Time Section -->
+                    <div class="form-group">
+                        <h3 class="settings-title">Preferred Task Time</h3>
+                        <div class="time-input-group">
+                            <select id="hour" name="hour" class="select-input" required>
+                                <option value="">Hour</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12" selected>12</option>
+                            </select>
+                            <select id="minute" name="minute" class="select-input" required>
+                                <option value="00" selected>00</option>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
+                            </select>
+                            <select id="am_pm" name="am_pm" class="select-input" required>
+                                <option value="">AM/PM</option>
+                                <option value="AM" selected>AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Skater Checkbox Section -->
+                    <div class="form-group">
+                        <h3 class="settings-title">Preferences</h3>
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="is_skater" name="is_skater">
+                            <span class="checkbox-label">I'm a skater</span>
+                        </label>
+                    </div>
+
+                    <!-- Difficulty Level Section -->
+                    <div class="form-group">
+                        <h3 class="settings-title">Difficulty Level</h3>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="difficulty" value="easier" id="easier">
+                                <span class="radio-label">Easier</span>
+                            </label>
+                            
+                            <label class="radio-option">
+                                <input type="radio" name="difficulty" value="normal" id="normal" checked>
+                                <span class="radio-label">Normal</span>
+                            </label>
+                            
+                            <label class="radio-option">
+                                <input type="radio" name="difficulty" value="harder" id="harder">
+                                <span class="radio-label">Harder</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="save-button">Save Settings</button>
+                </form>
+                
+                <div id="status-message" class="status-message"></div>
+            </div>
+        </section>
+    </main>
+
+
+    <script src="/settings.js"></script>
 </body>
 </html>

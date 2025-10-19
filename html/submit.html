@@ -4,26 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AggieQuest | Submission</title>
-    <link rel="stylesheet" href="../graphics/form-style.css">
+    <link rel="stylesheet" href="/index-style.css">
 </head>
 <body>
-    <div class="nav-bar">
-        <img src ="../graphics/logo.png" id="logo" alt="Logo">
-        <h1>AggieQuest</h1>
-    </div>
+    <nav class="nav-bar">
+        <a href="index.html" class="logo-link">
+            <img src="/logo.png" id="logo" alt="Logo">
+            <h1>AggieQuest</h1>
+        </a>
+        <div class="nav-links">
+            <a href="submit.html" class="nav-link active">Submit</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="settings.html" class="nav-link"><img src="/gear.png" alt="Settings" class="gear-icon"></a>
+        </div>
+    </nav>
 
-    <div class="title">
-        <h1>Task Completion Submission</h1>
-        
-        <form action="../form_handler.py" method="POST" enctype="multipart/form-data">
-            <label for="image">Upload Proof of Completion Here:</label><br><br>
-            <input type="file" id="image" name="image" accept="image/*" required><br><br><br><br>
-            
-            <label for="description">Description (Anything you want to write about!):</label><br><br>
-            <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter your description here..."></textarea><br><br>
+    <main class="main-content">
+        <section class="submit-section">
+            <div class="settings-container">
+                <h3 class="settings-title">Task Completion Submission</h3>
+                <p class="settings-description">Upload proof of your task completion and mark it as done!</p>
+                <!-- TODO: add better validation -->
+                
+                <form id="completion-form" class="settings-form">
+                    <div class="form-group">
+                        <label for="image" class="form-label">Upload Proof of Completion:</label>
+                        <input type="file" id="image" name="image" accept="image/*" class="file-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description" class="form-label">Description (Optional):</label>
+                        <textarea id="description" name="description" rows="4" class="text-input" placeholder="Tell us about your experience completing this task..."></textarea>
+                    </div>
 
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+                    <button type="submit" class="save-button">Mark Task Complete</button>
+                </form>
+                
+                <div class="submit-page-buttons">
+                    <button id="go-back-btn" class="go-back-button">← Go Back</button>
+                    <button id="view-gallery-btn" class="view-gallery-button">View Gallery</button>
+                </div>
+                
+                <div id="status-message" class="status-message"></div>
+            </div>
+        </section>
+    </main>
+
+
+    <script src="/submit.js"></script>
 </body>
 </html>

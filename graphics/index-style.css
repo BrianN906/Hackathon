@@ -1,21 +1,443 @@
-#logo {
-    width:70px;
-    height:70px;
+/* AggieQuest CSS - still learning this stuff */
+/* TODO: make this look better, fix the layout */
+
+/* basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+    padding-top: 80px; /* for navbar */
+}
+
+/* navbar - kept it simple */
 .nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #880015;
+    padding: 10px 20px;
     display: flex;
-    position: absolute;
-    width: 100vw;
-    top:0;
-    left:0;
     align-items: center;
     gap: 15px;
-    padding: 10px;
-    background-color: #880015;
+    z-index: 1000;
 }
 
-h1 {
+.nav-links {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* logo */
+#logo {
+    width: 50px;
+    height: 50px;
+}
+
+.nav-bar h1 {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* gear icon */
+.gear-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
+/* main content */
+.main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* top row */
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.welcome-left {
     text-align: left;
+}
+
+.time-right {
+    text-align: right;
+}
+
+/* task section */
+.task-section {
+    margin: 30px 0;
+}
+
+.task-box {
+    background-color: #f5f5f5;
+    border: 2px solid #880015;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.task-display-large {
+    font-size: 1.5rem;
+    padding: 30px;
+    background-color: #f5f5f5;
+    border: 2px solid #880015;
+    border-radius: 8px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* bottom row */
+.bottom-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.submit-left {
+    text-align: left;
+}
+
+.streak-right {
+    text-align: right;
+}
+
+/* buttons */
+.submit-task-button, .save-button {
+    background-color: #880015;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.submit-task-button:hover, .save-button:hover {
+    background-color: #6b0010;
+}
+
+.skip-day-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.skip-day-button:hover {
+    background-color: #c82333;
+}
+
+.skip-day-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* countdown timer */
+.countdown-timer {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #880015;
+    font-family: monospace;
+}
+
+/* settings page */
+.settings-container {
+    background-color: #f9f9f9;
+    border: 2px solid #880015;
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.settings-title {
+    font-size: 1.5rem;
+    color: #880015;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.text-input, .select-input, .file-input {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.text-input:focus, .select-input:focus, .file-input:focus {
+    outline: none;
+    border-color: #880015;
+}
+
+/* time inputs */
+.time-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* checkboxes and radio buttons */
+.checkbox-option, .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkbox-option:hover, .radio-option:hover {
+    border-color: #880015;
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* status messages */
+.status-message {
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.status-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* gallery page */
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.gallery-card {
+    background: white;
+    border: 2px solid #880015;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-task {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card-description p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.card-date {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* empty and error states */
+.empty-state, .error-state {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border: 2px dashed #880015;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.empty-state h3, .error-state h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* navigation buttons */
+.submit-page-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.go-back-button, .view-gallery-button, .back-to-home-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.go-back-button, .back-to-home-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+.view-gallery-button {
+    background-color: #880015;
+    color: white;
+}
+
+.go-back-button:hover, .back-to-home-button:hover {
+    background-color: #5a6268;
+}
+
+.view-gallery-button:hover {
+    background-color: #6b0010;
+}
+
+/* logo link */
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-link h1 {
+    color: white;
+    margin: 0;
+}
+
+/* basic responsive - we're still learning this */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
     
+    .top-row, .bottom-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .welcome-left, .time-right, .submit-left, .streak-right {
+        text-align: center;
+    }
+}
+
+/* Streak display styling */
+.streak-display {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #dc3545; /* Red color for 0 days */
+    margin-top: 5px;
+}
+
+.streak-display:not([data-streak="0"]) {
+    color: #28a745; /* Green color for non-zero streaks */
+}
+
+.streak-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
 }
