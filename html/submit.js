@@ -1,5 +1,4 @@
 // submit page - still working on this
-// TODO: fix the form submission, make it work better
 
 let currentTaskId = null;
 
@@ -64,7 +63,7 @@ async function handleFormSubmit(event) {
     
     try {
         // submit to server
-        const submitResponse = await fetch('http://127.0.0.1:5000/submit', {
+        const submitResponse = await fetch('/submit', {
             method: 'POST',
             body: formData
         });

@@ -1,14 +1,36 @@
 {
-  "completed_tasks": [],
-  "difficulty_preference": "normal",
+  "completed_tasks": [
+    {
+      "task": "Cook a meal instead of eating out.",
+      "task_id": "aggieLife_T2_1760888990",
+      "category": "aggieLife",
+      "tier": "T2",
+      "completed": true
+    },
+    {
+      "task": "Learn the name of one new trick, even if you don\u2019t try it yet.",
+      "task_id": "skating_special_1760891918",
+      "category": "skating",
+      "tier": "special",
+      "completed": true
+    },
+    {
+      "task": "End the day with a quick reflection on what went well.",
+      "task_id": "aggieLife_T1_1760891977",
+      "category": "aggieLife",
+      "tier": "T1",
+      "completed": true
+    }
+  ],
+  "difficulty_preference": "harder",
   "current_task": {
-    "task": "Watch a short educational or motivational video.",
-    "task_id": "aggieLife_T2_1760841576",
-    "category": "aggieLife",
+    "task": "Reflect on one thing that\u2019s been stressing you and write down solutions.",
+    "task_id": "personalGrowth_T2_1760895401",
+    "category": "personalGrowth",
     "tier": "T2",
     "completed": false
   },
-  "last_task_date": "2025-10-18",
-  "name": "John",
-  "is_skater": false
+  "last_task_date": "2025-10-19",
+  "name": "Brian",
+  "is_skater": true
 }

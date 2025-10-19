@@ -1,5 +1,4 @@
 // gallery page - still working on this
-// TODO: make it look better, fix the delete button
 
 // when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // load submissions - basic version
 async function loadSubmissions() {
     try {
-        const response = await fetch('http://127.0.0.1:5000/gallery');
+        const response = await fetch('/gallery');
         const data = await response.json();
         
         if (data.submissions && data.submissions.length > 0) {
@@ -55,7 +54,7 @@ function createSubmissionCard(submission) {
     
     card.innerHTML = 
         '<div class="card-image-container">' +
-            '<img src="http://127.0.0.1:5000/uploads/' + submission.image_filename + '" ' +
+            '<img src="/uploads/' + submission.image_filename + '" ' +
                  'alt="Submission image" class="card-image">' +
         '</div>' +
         '<div class="card-content">' +
@@ -105,7 +104,7 @@ async function deleteSubmission(taskId) {
     }
     
     try {
-        const response = await fetch('http://127.0.0.1:5000/delete-submission', {
+        const response = await fetch('/delete-submission', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

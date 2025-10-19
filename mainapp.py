@@ -1,68 +1,72 @@
-# AggieQuest - Hackathon Project
-# Task management system with web interface
-# Built for Texas A&M students during a 12-hour hackathon
-
 from flask import Flask, request, jsonify, send_file
+from flask_cors import CORS
 import random
 import json
 import os
 from datetime import datetime
 
 app = Flask(__name__)
+CORS(app)
 
 # task banks - we loaded these from files
-AL_tier1_bank = []
-AL_tier2_bank = []
-AL_tier3_bank = []
-MH_tier1_bank = []
-MH_tier2_bank = []
-MH_tier3_bank = []
+al_tier1_bank = []
+al_tier2_bank = []
+al_tier3_bank = []
+mh_tier1_bank = []
+mh_tier2_bank = []
+mh_tier3_bank = []
+skating_tasks_bank = []
 
 # load tasks from files - took us a while to get this working
-# TODO: make this more efficient
 def load_tasks():
-    global AL_tier1_bank, AL_tier2_bank, AL_tier3_bank
-    global MH_tier1_bank, MH_tier2_bank, MH_tier3_bank
+    global al_tier1_bank, al_tier2_bank, al_tier3_bank
+    global mh_tier1_bank, mh_tier2_bank, mh_tier3_bank
+    global skating_tasks_bank
     
     # load aggie life tasks
     try:
         with open('tasks/aggieLife_T1.txt', 'r', encoding='utf-8') as f:
-            AL_tier1_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
+            al_tier1_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
     except:
-        print("couldn't load AL T1 tasks")
+        print("couldn't load al t1 tasks")
     
     try:
         with open('tasks/aggieLife_T2.txt', 'r', encoding='utf-8') as f:
-            AL_tier2_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
+            al_tier2_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
     except:
-        print("couldn't load AL T2 tasks")
+        print("couldn't load al t2 tasks")
     
     try:
         with open('tasks/aggieLife_T3.txt', 'r', encoding='utf-8') as f:
-            AL_tier3_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
+            al_tier3_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
     except:
-        print("couldn't load AL T3 tasks")
+        print("couldn't load al t3 tasks")
     
     # load personal growth tasks
     try:
         with open('tasks/personalGrowth_T1.txt', 'r', encoding='utf-8') as f:
-            MH_tier1_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
+            mh_tier1_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
     except:
-        print("couldn't load MH T1 tasks")
+        print("couldn't load mh t1 tasks")
     
     try:
         with open('tasks/personalGrowth_T2.txt', 'r', encoding='utf-8') as f:
-            MH_tier2_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
+            mh_tier2_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
     except:
-        print("couldn't load MH T2 tasks")
+        print("couldn't load mh t2 tasks")
     
     try:
         with open('tasks/personalGrowth_T3.txt', 'r', encoding='utf-8') as f:
-            MH_tier3_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
+            mh_tier3_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
     except:
-        print("couldn't load MH T3 tasks")
+        print("couldn't load mh t3 tasks")
     
-
+    # load skating tasks
+    try:
+        with open('tasks/skatingTasks.txt', 'r', encoding='utf-8') as f:
+            skating_tasks_bank = [line.strip() for line in f.readlines()[1:] if line.strip()]
+    except:
+        print("couldn't load skating tasks")
 # load tasks when we start
 load_tasks()
 
@@ -74,8 +78,6 @@ def get_user_data():
     try:
         with open('user_data.json', 'r') as f:
             data = json.load(f)
-            
-            
             return data
     except:
         # default data if file doesn't exist
@@ -113,7 +115,6 @@ def save_submissions(data):
         return False
 
 # simple task selection - kept it basic
-# TODO: add better task selection logic
 def get_daily_task():
     user_data = get_user_data()
     
@@ -122,32 +123,24 @@ def get_daily_task():
     if user_data.get('last_task_date') == today and user_data.get('current_task'):
         return user_data['current_task']
     
+    # randomly select from all 6 task files equally
+    all_task_banks = [
+        (al_tier1_bank, 'aggieLife', 'T1'),
+        (al_tier2_bank, 'aggieLife', 'T2'),
+        (al_tier3_bank, 'aggieLife', 'T3'),
+        (mh_tier1_bank, 'personalGrowth', 'T1'),
+        (mh_tier2_bank, 'personalGrowth', 'T2'),
+        (mh_tier3_bank, 'personalGrowth', 'T3')
+    ]
     
-    # pick a random category - hardcoded for now
-    category = random.choice(['aggieLife', 'personalGrowth'])
+    # filter out empty banks
+    available_banks = [(bank, cat, tier) for bank, cat, tier in all_task_banks if bank]
     
-# pick a random tier (simplified this)
-# TODO: make this smarter
-    tier = random.choice(['T1', 'T2', 'T3'])
-    
-    # get the task list
-    if category == 'aggieLife':
-        if tier == 'T1':
-            task_list = AL_tier1_bank
-        elif tier == 'T2':
-            task_list = AL_tier2_bank
-        else:
-            task_list = AL_tier3_bank
-    else:
-        if tier == 'T1':
-            task_list = MH_tier1_bank
-        elif tier == 'T2':
-            task_list = MH_tier2_bank
-        else:
-            task_list = MH_tier3_bank
-    
-    if not task_list:
+    if not available_banks:
         return {"task": "No tasks available", "task_id": "", "category": "", "tier": ""}
+    
+    # pick a random bank
+    task_list, category, tier = random.choice(available_banks)
     
     # pick a random task
     task = random.choice(task_list)
@@ -167,6 +160,30 @@ def get_daily_task():
     
     return user_data['current_task']
 
+# kickflip friday task selection
+def get_kickflip_friday_task():
+    user_data = get_user_data()
+    
+    if not skating_tasks_bank:
+        return {"task": "No skating tasks available", "task_id": "", "category": "skating", "tier": "special"}
+    
+    # pick a random skating task
+    task = random.choice(skating_tasks_bank)
+    # create task id - simple version
+    task_id = f"skating_special_{int(datetime.now().timestamp())}"
+    
+    # save the task
+    user_data['current_task'] = {
+        'task': task,
+        'task_id': task_id,
+        'category': 'skating',
+        'tier': 'special',
+        'completed': False
+    }
+    user_data['last_task_date'] = datetime.now().date().isoformat()
+    save_user_data(user_data)
+    
+    return user_data['current_task']
 
 # add submission
 def add_submission(task_id, description, image_filename):
@@ -185,20 +202,18 @@ def add_submission(task_id, description, image_filename):
         submissions["submissions"].append(submission)
         save_submissions(submissions)
         
-        # Create a copy of the task before clearing it
+        # create a copy of the task before clearing it
         completed_task = user_data['current_task'].copy()
         completed_task['completed'] = True
         user_data['completed_tasks'].append(completed_task)
         
-        
-        user_data['current_task'] = None  # Clear current task
+        user_data['current_task'] = None  # clear current task
         save_user_data(user_data)
         
         return True
     return False
 
-# Flask routes - learned this from a tutorial
-# TODO: add more routes, fix error handling
+# flask routes - learned this from a tutorial
 @app.route('/')
 def index():
     return send_file('html/index.html')
@@ -251,11 +266,28 @@ def gear():
 def uploaded_file(filename):
     return send_file(f'uploads/{filename}')
 
-# API endpoints
+# api endpoints
 @app.route('/task')
 def api_task():
     task = get_daily_task()
     return jsonify(task)
+
+@app.route('/skip-day', methods=['POST'])
+def api_skip_day():
+    user_data = get_user_data()
+    # clear current task and date to force new task generation
+    user_data['current_task'] = None
+    user_data['last_task_date'] = None
+    save_user_data(user_data)
+    
+    # generate new task
+    task = get_daily_task()
+    return jsonify({'success': True, 'task': task})
+
+@app.route('/kickflip-friday', methods=['POST'])
+def api_kickflip_friday():
+    task = get_kickflip_friday_task()
+    return jsonify({'success': True, 'task': task})
 
 
 @app.route('/submit', methods=['POST'])
@@ -297,17 +329,34 @@ def api_settings():
     user_data = get_user_data()
     return jsonify({
         'name': user_data.get('name', ''),
-        'preferred_hour': '12',
-        'preferred_minute': '00',
-        'preferred_am_pm': 'AM',
+        'preferred_hour': '12',  # not implemented yet
+        'preferred_minute': '00',  # not implemented yet
+        'preferred_am_pm': 'AM',  # not implemented yet
         'is_skater': user_data.get('is_skater', False),
-        'difficulty': user_data.get('difficulty_preference', 'normal')
+        'difficulty': user_data.get('difficulty_preference', 'normal')  # not implemented yet
     })
 
 @app.route('/settings', methods=['POST'])
 def api_update_settings():
-    # Settings functionality disabled - just return success
-    return jsonify({'success': True, 'message': 'Settings saved! (Demo mode)'})
+    try:
+        data = request.get_json()
+        
+        # get current user data
+        user_data = get_user_data()
+        
+        # update settings - allow empty name to reset to default
+        user_data['name'] = data.get('name', '').strip() if data.get('name') else ''
+        user_data['difficulty_preference'] = data.get('difficulty', 'normal')
+        user_data['is_skater'] = data.get('is_skater', False)
+        
+        # save updated data
+        if save_user_data(user_data):
+            return jsonify({'success': True, 'message': 'Settings saved successfully!'})
+        else:
+            return jsonify({'success': False, 'message': 'Error saving settings'})
+            
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Error processing settings: {str(e)}'})
 
 
 
@@ -335,13 +384,6 @@ def api_delete_submission():
 
 # main function
 if __name__ == '__main__':
-    print("========================================")
-    print("AggieQuest Project")
-    print(f"Loaded {len(AL_tier1_bank)} AL T1 tasks")
-    print(f"Loaded {len(AL_tier2_bank)} AL T2 tasks") 
-    print(f"Loaded {len(AL_tier3_bank)} AL T3 tasks")
-    print(f"Loaded {len(MH_tier1_bank)} MH T1 tasks")
-    print(f"Loaded {len(MH_tier2_bank)} MH T2 tasks")
-    print(f"Loaded {len(MH_tier3_bank)} MH T3 tasks")
-    print("========================================")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    total_tasks = len(al_tier1_bank) + len(al_tier2_bank) + len(al_tier3_bank) + len(mh_tier1_bank) + len(mh_tier2_bank) + len(mh_tier3_bank) + len(skating_tasks_bank)
+    print(f"loaded {total_tasks} tasks - server ready!")
+    app.run(debug=False, host='0.0.0.0', port=5000)

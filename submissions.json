@@ -1,3 +1,18 @@
 {
-  "submissions": []
+  "submissions": [
+    {
+      "task_id": "skating_special_1760891918",
+      "task_text": "Learn the name of one new trick, even if you don\u2019t try it yet.",
+      "description": "This is from when I landed my first kickflip!",
+      "image_filename": "20251019_113931_kickflip.jpg",
+      "date": "2025-10-19T11:39:31.818656"
+    },
+    {
+      "task_id": "aggieLife_T1_1760891977",
+      "task_text": "End the day with a quick reflection on what went well.",
+      "description": "This is my and my friends celebrating a good day together.",
+      "image_filename": "20251019_114002_stock.jpg",
+      "date": "2025-10-19T11:40:02.661401"
+    }
+  ]
 }

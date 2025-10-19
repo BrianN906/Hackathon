@@ -1,5 +1,4 @@
-/* AggieQuest CSS - still learning this stuff */
-/* TODO: make this look better, fix the layout */
+/* aggiequest css - still learning this stuff */
 
 /* basic reset */
 * {
@@ -71,7 +70,7 @@ body {
 
 /* main content */
 .main-content {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
@@ -95,20 +94,16 @@ body {
 }
 
 .task-box {
-    background-color: #f5f5f5;
-    border: 2px solid #880015;
-    border-radius: 8px;
-    padding: 20px;
     margin: 20px 0;
 }
 
 .task-display-large {
-    font-size: 1.5rem;
-    padding: 30px;
-    background-color: #f5f5f5;
+    font-size: 2.2rem;
+    padding: 40px;
+    background-color: #d3d3d3;
     border: 2px solid #880015;
     border-radius: 8px;
-    min-height: 100px;
+    min-height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -117,14 +112,13 @@ body {
 /* bottom row */
 .bottom-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 20px;
 }
 
 .submit-left {
-    text-align: left;
+    text-align: center;
 }
-
 
 /* buttons */
 .submit-task-button, .save-button {
@@ -140,8 +134,6 @@ body {
 .submit-task-button:hover, .save-button:hover {
     background-color: #6b0010;
 }
-
-
 
 /* settings page */
 .settings-container {
@@ -376,6 +368,39 @@ body {
     margin: 0;
 }
 
+/* demo buttons */
+.demo-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.demo-buttons-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.demo-button {
+    background-color: #880015;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.demo-button:hover {
+    background-color: #6b0010;
+}
+
+.demo-button:active {
+    background-color: #5a000c;
+}
+
 /* basic responsive - we're still learning this */
 @media (max-width: 768px) {
     .gallery-grid {
@@ -389,5 +414,14 @@ body {
     
     .welcome-left, .submit-left {
         text-align: center;
+    }
+    
+    .demo-buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .demo-button {
+        width: 200px;
     }
 }

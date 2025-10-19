@@ -1,5 +1,4 @@
 // settings page - still learning this
-// TODO: make the form work better, fix validation
 
 // when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,15 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // load current settings - simple version
 async function loadCurrentSettings() {
     try {
-        const response = await fetch('http://127.0.0.1:5000/settings');
+        const response = await fetch('/settings');
         const data = await response.json();
         
-        // load name
-        if (data.name) {
-            document.getElementById('name').value = data.name;
-        }
+        // load name (show empty if no name set)
+        document.getElementById('name').value = data.name || '';
         
-        // load time settings
+        // load time settings (not implemented yet)
         if (data.preferred_hour) {
             document.getElementById('hour').value = data.preferred_hour;
         }
@@ -37,7 +34,7 @@ async function loadCurrentSettings() {
             document.getElementById('is_skater').checked = data.is_skater;
         }
         
-        // load difficulty
+        // load difficulty (not implemented yet)
         if (data.difficulty) {
             const radioButton = document.getElementById(data.difficulty);
             if (radioButton) {
@@ -64,12 +61,7 @@ async function handleFormSubmit(event) {
         difficulty: formData.get('difficulty')
     };
     
-    // basic validation
-    if (!settings.name) {
-        showStatusMessage('Please enter your name', 'error');
-        return;
-    }
-    
+    // basic validation (name is optional now)
     if (!settings.preferred_hour || !settings.preferred_minute || !settings.preferred_am_pm) {
         showStatusMessage('Please select your preferred time', 'error');
         return;
@@ -80,8 +72,27 @@ async function handleFormSubmit(event) {
         return;
     }
     
-    // Just show success message - no backend call
-    showStatusMessage('Settings saved! (Demo mode)', 'success');
+    // send settings to backend
+    try {
+        const response = await fetch('/settings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(settings)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showStatusMessage('Settings saved successfully!', 'success');
+        } else {
+            showStatusMessage('Error saving settings: ' + result.message, 'error');
+        }
+    } catch (error) {
+        console.log('Error saving settings:', error);
+        showStatusMessage('Error saving settings', 'error');
+    }
 }
 
 // show status message - basic version
